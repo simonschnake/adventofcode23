@@ -77,8 +77,9 @@ map(input) do line
     count_possible_strings(a, b, memo)
 end |> sum
 
+using BenchmarkTools
 # Part 2
-map(input) do line
+@benchmark map(input) do line
     a, b = parse_line(line)
     a = repeat(a * "?", 5)[1:end-1]
     b = repeat(b, 5)
