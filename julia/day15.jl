@@ -1,24 +1,13 @@
 inputs = read("inputs/day15", String)
-inputs = "rn=1,cm-,qp=3,cm=2,qp-,pc=4,ot=9,ab=5,pc-,pc=6,ot=7"
+#inputs = "rn=1,cm-,qp=3,cm=2,qp-,pc=4,ot=9,ab=5,pc-,pc=6,ot=7"
 
-function hash_val(x, y)
-    ans = x + y
-    ans = ans * 17
-    ans = ans % 256
-    return ans
-end
-
-function hash_fn(s)
-    xs = Int.(collect(s))
-    foldl(hash_val, xs, init=0)
-end
-
+hash_val(x, y) = (x + y) * 17 % 256
+hash_fn(s) = foldl(hash_val, Int.(collect(s)), init=0)
 hash_fn.(split(inputs, ",")) |> sum
 
 # Part 2
 
-
-function collect_boxes(input)
+function collect_boxes(inputs)
     boxes = [Vector{Tuple{String, Int}}() for _ in 1:256]
 
     for x in split(inputs, ",")
